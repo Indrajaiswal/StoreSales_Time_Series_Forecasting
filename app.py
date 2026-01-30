@@ -1,3 +1,16 @@
+import sys
+import warnings
+
+# Python 3.13 Streamlit patch (imghdr)
+if sys.version_info >= (3, 13):
+    import types
+    warnings.warn(
+        "⚠️ Python 3.13 detected. Streamlit uses 'imghdr' internally, "
+        "which is removed in this Python version. "
+        "Since your app doesn't use images, this patch prevents a crash."
+    )
+    sys.modules["imghdr"] = types.ModuleType("imghdr")
+    
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
